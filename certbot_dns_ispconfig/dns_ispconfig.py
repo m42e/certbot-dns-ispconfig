@@ -196,6 +196,7 @@ class _ISPConfigClient(object):
                 "zone": zone_id,
                 "ttl": record_ttl,
                 "update_serial": False,
+                "stamp": time.strftime('%Y-%m-%d %H:%M:%S'),
             },
         }
         return data
