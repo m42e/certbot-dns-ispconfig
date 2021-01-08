@@ -103,7 +103,7 @@ class _ISPConfigClient(object):
             )
         try:
             result = resp.json()
-        except:
+        except json.decoder.JSONDecodeError:
             raise errors.PluginError(
                 "API response with non JSON: {0}".format(resp.text)
             )
