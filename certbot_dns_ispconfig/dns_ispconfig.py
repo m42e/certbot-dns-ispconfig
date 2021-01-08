@@ -240,7 +240,7 @@ class _ISPConfigClient(object):
                 return zone_id, zone_name
             except errors.PluginError as e:
                 pass
-        return None
+        return None, None
 
     def get_existing_txt(self, zone_id, record_name, record_content):
         """
