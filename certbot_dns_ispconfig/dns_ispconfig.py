@@ -205,7 +205,7 @@ class _ISPConfigClient(object):
     def _insert_txt_record(self, zone_id, record_name, record_content, record_ttl):
         data = self._prepare_rr_data(zone_id, record_name, record_content, record_ttl)
         logger.debug("insert with data: %s", data)
-        result = self._api_request("dns_txt_add", data)
+        self._api_request("dns_txt_add", data)
 
     def _update_txt_record(
         self, zone_id, primary_id, record_name, record_content, record_ttl
@@ -213,12 +213,12 @@ class _ISPConfigClient(object):
         data = self._prepare_rr_data(zone_id, record_name, record_content, record_ttl)
         data["primary_id"] = primary_id
         logger.debug("update with data: %s", data)
-        result = self._api_request("dns_txt_update", data)
+        self._api_request("dns_txt_update", data)
 
     def _delete_txt_record(self, primary_id):
         data = {"primary_id": primary_id}
         logger.debug("delete with data: %s", data)
-        result = self._api_request("dns_txt_delete", data)
+        self._api_request("dns_txt_delete", data)
 
     def _find_managed_zone_id(self, domain, record_name):
         """
@@ -238,7 +238,7 @@ class _ISPConfigClient(object):
                 logger.debug("looking for zone: %s", zone_name)
                 zone_id = self._api_request("dns_zone_get_id", {"origin": zone_name})
                 return zone_id, zone_name
-            except errors.PluginError as e:
+            except errors.PluginError:
                 pass
         return None, None
 
