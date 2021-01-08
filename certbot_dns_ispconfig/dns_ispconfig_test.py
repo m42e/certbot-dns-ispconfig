@@ -94,7 +94,7 @@ class ISPConfigClientTest(unittest.TestCase):
             data = json.loads(request.text)
             add_result = True
             if additional_matcher is not None:
-                add_result = additionsal_matcher(request)
+                add_result = additional_matcher(request)
 
             return (
                 (
