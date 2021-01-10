@@ -8,7 +8,6 @@ import requests_mock
 
 from certbot import errors
 from certbot.compat import os
-from certbot.errors import PluginError
 from certbot.plugins import dns_test_common
 from certbot.plugins.dns_test_common import DOMAIN
 from certbot.tests import util as test_util
@@ -94,7 +93,7 @@ class ISPConfigClientTest(unittest.TestCase):
             data = json.loads(request.text)
             add_result = True
             if additional_matcher is not None:
-                add_result = additionsal_matcher(request)
+                add_result = additional_matcher(request)
 
             return (
                 (
@@ -127,14 +126,14 @@ class ISPConfigClientTest(unittest.TestCase):
     def test_add_txt_record_fail_to_find_domain(self):
         self._register_response("login", response="FAKE_SESSION")
         self._register_response("dns_zone_get_id", message="Not Found")
-        with self.assertRaises(errors.PluginError) as context:
+        with self.assertRaises(errors.PluginError):
             self.client.add_txt_record(
                 DOMAIN, self.record_name, self.record_content, self.record_ttl
             )
 
     def test_add_txt_record_fail_to_authenticate(self):
         self._register_response("login", message="FAILED")
-        with self.assertRaises(errors.PluginError) as context:
+        with self.assertRaises(errors.PluginError):
             self.client.add_txt_record(
                 DOMAIN, self.record_name, self.record_content, self.record_ttl
             )
@@ -151,14 +150,14 @@ class ISPConfigClientTest(unittest.TestCase):
     def test_del_txt_record_fail_to_find_domain(self):
         self._register_response("login", response="FAKE_SESSION")
         self._register_response("dns_zone_get_id", message="Not Found")
-        with self.assertRaises(errors.PluginError) as context:
+        with self.assertRaises(errors.PluginError):
             self.client.del_txt_record(
                 DOMAIN, self.record_name, self.record_content, self.record_ttl
             )
 
     def test_del_txt_record_fail_to_authenticate(self):
         self._register_response("login", message="FAILED")
-        with self.assertRaises(errors.PluginError) as context:
+        with self.assertRaises(errors.PluginError):
             self.client.del_txt_record(
                 DOMAIN, self.record_name, self.record_content, self.record_ttl
             )
