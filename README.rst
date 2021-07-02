@@ -41,7 +41,7 @@ certbot's command line:
 
 ``--certbot-dns-ispconfig:dns-ispconfig-propagation-seconds`` | waiting time for DNS to propagate before asking
                                                               | the ACME server to verify the DNS record.
-                                                              | (Default: 10, Recommended: >= 600)
+                                                              | (Default: 120, Recommended: >= 600)
 ============================================================= ==============================================
 
 (Note that the verbose and seemingly redundant ``certbot-dns-ispconfig:`` prefix
@@ -57,7 +57,7 @@ An example ``credentials.ini`` file:
 
    certbot_dns_ispconfig:dns_ispconfig_username = myremoteuser
    certbot_dns_ispconfig:dns_ispconfig_password = verysecureremoteuserpassword
-   certbot_dns_ispconfig:dns_ispconfig_endpoint = https://localhost:8080/remote/json.php
+   certbot_dns_ispconfig:dns_ispconfig_endpoint = https://you.ipsconfig.host:8080/remote/json.php
 
 The path to this file can be provided interactively or using the
 ``--certbot-dns-ispconfig:dns-ispconfig-credentials`` command-line argument. Certbot
