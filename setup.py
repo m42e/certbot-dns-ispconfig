@@ -1,7 +1,8 @@
+from os import path
 from setuptools import setup
 from setuptools import find_packages
 
-version = "0.2.0"
+version = "0.2.1"
 
 install_requires = [
     "acme>=0.29.0",
@@ -13,7 +14,6 @@ install_requires = [
 ]
 
 # read the contents of your README file
-from os import path
 
 this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, "README.rst")) as f:
